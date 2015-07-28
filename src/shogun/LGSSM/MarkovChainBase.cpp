@@ -9,10 +9,7 @@
  * Copyright (C) 1999-2009 Fraunhofer Institute FIRST and Max-Planck-Society
  */
 
-#include <shogun/clustering/KMeansLloydImpl.h>
-#include "shogun/clustering/KMeansMiniBatchImpl.h"
-#include <shogun/clustering/KMeans.h>
-#include <shogun/distance/Distance.h>
+
 #include <shogun/labels/Labels.h>
 #include <shogun/features/DenseFeatures.h>
 #include <shogun/mathematics/Math.h>
