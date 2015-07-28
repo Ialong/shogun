@@ -51,14 +51,12 @@ template <class T> class CMarkovChainBase : public CSGObject
 		/** returns the name of the class */
 		virtual const char* get_name() const { return "MarkovChainBase"; }
 
-		/** expectation step
+		/** generates a random Markov chain
 		 *
-		 * @return updated value log_likelihood
+		 * @return the values of the variables at each time point in a DxT matrix (D is the variable 
+		 * dimensionality, T is the number of time samples)
 		 */
-		virtual float64_t expectation_step()=0;
-
-		/** maximization step */
-		virtual void maximization_step()=0;
+		virtual SGMatrix<float64_t> generate_markov_chain()=0;
 
 		/** Expectation Maximization algorithm - runs expectation step and maximization step repeatedly as long as
 		 * max number of iterations is not reached or convergence does not take place.
