@@ -43,7 +43,7 @@
 
 #include <shogun/lib/config.h>
 
-#include <shogun/machine/gp/KLInferenceMethod.h>
+#include <shogun/machine/gp/KLInference.h>
 
 namespace shogun
 {
@@ -69,7 +69,7 @@ namespace shogun
  * https://gist.github.com/yorkerlin/b64a015491833562d11a
  *
  */
-class CKLCovarianceInferenceMethod: public CKLInferenceMethod
+class CKLCovarianceInferenceMethod: public CKLInference
 {
 public:
 	/** default constructor */
@@ -105,7 +105,7 @@ public:
 	 * @param inference inference method
 	 * @return casted CKLCovarianceInferenceMethod object
 	 */
-	static CKLCovarianceInferenceMethod* obtain_from_generic(CInferenceMethod* inference);
+	static CKLCovarianceInferenceMethod* obtain_from_generic(CInference* inference);
 
 	/** get alpha vector
 	 *
@@ -161,7 +161,7 @@ protected:
 	 */
 	virtual void get_gradient_of_nlml_wrt_parameters(SGVector<float64_t> gradient);
 
-	/** pre-compute the information for lbfgs optimization.
+	/** pre-compute the information for optimization.
 	 * This function needs to be called before calling
 	 * get_negative_log_marginal_likelihood_wrt_parameters()
 	 * and/or
@@ -169,7 +169,7 @@ protected:
 	 *
 	 * @return true if precomputed parameters are valid
 	 */
-	virtual bool lbfgs_precompute();
+	virtual bool precompute();
 
 	/** compute matrices which are required to compute negative log marginal
 	 * likelihood derivatives wrt  hyperparameter in cov function

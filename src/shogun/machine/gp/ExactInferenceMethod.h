@@ -35,7 +35,7 @@
 #include <shogun/lib/config.h>
 
 
-#include <shogun/machine/gp/InferenceMethod.h>
+#include <shogun/machine/gp/Inference.h>
 
 namespace shogun
 {
@@ -63,7 +63,7 @@ namespace shogun
  * NOTE: The Gaussian Likelihood Function must be used for this inference
  * method.
  */
-class CExactInferenceMethod: public CInferenceMethod
+class CExactInferenceMethod: public CInference
 {
 public:
 	/** default constructor */
@@ -99,7 +99,7 @@ public:
 	 * @param inference inference method
 	 * @return casted CExactInferenceMethod object
 	 */
-	static CExactInferenceMethod* obtain_from_generic(CInferenceMethod* inference);
+	static CExactInferenceMethod* obtain_from_generic(CInference* inference);
 
 	/** get negative log marginal likelihood
 	 *
@@ -187,7 +187,11 @@ public:
 	/** update matrices except gradients*/
 	virtual void update();
 
-
+        /** Set a minimizer
+         *
+         * @param minimizer minimizer used in inference method
+         */
+	virtual void register_minimizer(Minimizer* minimizer);
 protected:
 	/** check if members of object are valid for inference */
 	virtual void check_members() const;
@@ -210,9 +214,9 @@ protected:
 	virtual void update_deriv();
 
 	/** returns derivative of negative log marginal likelihood wrt parameter of
-	 * CInferenceMethod class
+	 * CInference class
 	 *
-	 * @param param parameter of CInferenceMethod class
+	 * @param param parameter of CInference class
 	 *
 	 * @return derivative of negative log marginal likelihood
 	 */

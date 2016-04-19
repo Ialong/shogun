@@ -37,7 +37,7 @@
 #include <shogun/lib/config.h>
 
 
-#include <shogun/machine/gp/InferenceMethod.h>
+#include <shogun/machine/gp/Inference.h>
 
 namespace shogun
 {
@@ -49,7 +49,7 @@ namespace shogun
  * Approximate Bayesian Inference. PhD thesis, Massachusetts Institute of
  * Technology
  */
-class CEPInferenceMethod : public CInferenceMethod
+class CEPInferenceMethod : public CInference
 {
 public:
 	/** default constructor */
@@ -85,7 +85,7 @@ public:
 	 * @param inference inference method
 	 * @return casted CEPInferenceMethod object
 	 */
-	static CEPInferenceMethod* obtain_from_generic(CInferenceMethod* inference);
+	static CEPInferenceMethod* obtain_from_generic(CInference* inference);
 
 	/** returns the negative logarithm of the marginal likelihood function:
 	 *
@@ -245,6 +245,11 @@ public:
 	/** update all matrices Expect gradients*/
 	virtual void update();
 
+	/** Set a minimizer
+	 *
+	 * @param minimizer minimizer used in inference method
+	 */
+	virtual void register_minimizer(Minimizer* minimizer);
 protected:
 	/** update gradients */
 	virtual void compute_gradient();
@@ -270,9 +275,9 @@ protected:
 	virtual void update_deriv();
 
 	/** returns derivative of negative log marginal likelihood wrt parameter of
-	 * CInferenceMethod class
+	 * CInference class
 	 *
-	 * @param param parameter of CInferenceMethod class
+	 * @param param parameter of CInference class
 	 *
 	 * @return derivative of negative log marginal likelihood
 	 */

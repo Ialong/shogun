@@ -40,8 +40,7 @@
 #include <shogun/machine/GaussianProcessMachine.h>
 #include <shogun/mathematics/Math.h>
 #include <shogun/kernel/Kernel.h>
-#include <shogun/machine/gp/SingleFITCLaplacianBase.h>
-
+#include <shogun/machine/gp/SingleFITCInference.h>
 #include <shogun/mathematics/eigen3.h>
 
 using namespace shogun;
@@ -52,7 +51,7 @@ CGaussianProcessMachine::CGaussianProcessMachine()
 	init();
 }
 
-CGaussianProcessMachine::CGaussianProcessMachine(CInferenceMethod* method)
+CGaussianProcessMachine::CGaussianProcessMachine(CInference* method)
 {
 	init();
 	set_inference_method(method);
@@ -77,8 +76,8 @@ SGVector<float64_t> CGaussianProcessMachine::get_posterior_means(CFeatures* data
 
 	CFeatures* feat;
 
-	CSingleSparseInferenceBase* sparse_method=
-		dynamic_cast<CSingleSparseInferenceBase *>(m_method);
+	CSingleSparseInference* sparse_method=
+		dynamic_cast<CSingleSparseInference *>(m_method);
 	// use inducing features for sparse inference method
 	if (sparse_method)
 	{
@@ -138,8 +137,8 @@ SGVector<float64_t> CGaussianProcessMachine::get_posterior_variances(
 	CFeatures* feat;
 
 	bool is_sparse=false;
-	CSingleSparseInferenceBase* sparse_method=
-		dynamic_cast<CSingleSparseInferenceBase *>(m_method);
+	CSingleSparseInference* sparse_method=
+		dynamic_cast<CSingleSparseInference *>(m_method);
 	// use inducing features for sparse inference method
 	if (sparse_method)
 	{
