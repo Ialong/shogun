@@ -34,11 +34,34 @@
 #ifndef _STATIONARYKERNELBASE_H__
 #define _STATIONARYKERNELBASE_H__
 
+#include <shogun/lib/config.h>
+#include <shogun/base/SGObject.h>
+
+namespace shogun
+{
+
+/** @brief This is the base class for Expectation Maximization (EM). EM for various purposes can be derived from
+ * this base class. This is a template class having a template member called data which can be used to store all
+ * parameters used and results calculated by the expectation and maximization steps of EM.
+ */
+template <class T> class CStationaryKernelBase : public CSGObject
+{
+	public:
+		/** constructor */
+		CStationaryKernelBase() : CSGObject() { };
+
+		/** destructor */
+		virtual ~CStationaryKernelBase() { };
+
+		/** returns the name of the class */
+		virtual const char* get_name() const { return "StationaryKernelBase"; }
 
 
 
 
 
+
+#endif /* _STATIONARYKERNELBASE_H__ */
 
 
 
