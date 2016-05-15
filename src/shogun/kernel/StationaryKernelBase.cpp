@@ -30,67 +30,12 @@
  *
  */
 
+#include <shogun/lib/common.h>
+#include <shogun/io/SGIO.h>
 
-#ifndef _STATIONARYKERNELBASE_H__
-#define _STATIONARYKERNELBASE_H__
-
-#include <shogun/lib/config.h>
-
-#include <sholib/common.h>
-#include <shogun/kernel/Kernel.h>
+#include <shogun/kernel/StationaryKernelBase.h>
 #include <shogun/features/Features.h>
 
-namespace shogun
-{
-/** @brief This is the base class for all stationary kernels.
- * I.e. those kernel functions which only rely on the computed
- * distance d between their input points. They are thus translation
- * invariant (e.g. Gaussian Kernel).
-*/
-template <class T> class CStationaryKernelBase : public CKernel
-{
-	public:
-		/** default constructor */
-		CStationaryKernelBase();
+using namespace shogun;
 
-		/** constructor
-		 *
-		 * @param l features of left-hand side
-		 * @param r features of right-hand side
-		 */
-		CStationaryKernelBase(CFeatures* l, CFeatures* r);
 
-		/** destructor */
-		virtual ~CStationaryKernelBase();
-
-		/** returns the name of the class */
-		virtual const char* get_name() const { return "StationaryKernelBase";
-
-		virtual EKernelType get_kernel_type()=0;
-
-	protected:
-		/** compute kernel function for features a and b
-		 * idx_{a,b} denote the index of the feature vectors
-		 * in the corresponding feature object
-		 * @param idx_a index a
-		 * @param idx_b index b
-		 * @return computed kernel function at indices a,b
-		 */
-		virtual float64_t compute(int32_t idx_a, int32_t idx_b)=0;
-
-		/** subtract vector b from vector a
-		 * @param idx_a index a
-		 * @param idx_b index b
-		 * @return difference between a and b, a - b
-		 */
-		virtual CFeatures get_feature_diff(int32_t idx_a, int32_t idx_b);
-
-	private:
-		void init();
-
-	protected:
-		/** computed vector difference */
-		feature_diff;
-};
-}
-#endif /* _STATIONARYKERNELBASE_H__ */
